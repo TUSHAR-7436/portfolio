@@ -4,171 +4,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tushar Agarwal | Full Stack Developer</title>
-    <meta name="description" content="Portfolio of Tushar Agarwal, a Full Stack Developer and CSE Student.">
+    <title>Tushar Saini | Full Stack Developer</title>
+    <meta name="description" content="Portfolio of Tushar Saini, a Full Stack Developer and CSE Student.">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-    <!-- Lenis CSS (Recommended) -->
-    <style>
-        html.lenis,
-        html.lenis body {
-            height: auto;
-        }
-
-        .lenis.lenis-smooth {
-            scroll-behavior: auto !important;
-        }
-
-        .lenis.lenis-smooth [data-lenis-prevent] {
-            overscroll-behavior: contain;
-        }
-
-        .lenis.lenis-stopped {
-            overflow: hidden;
-        }
-
-        .lenis.lenis-scrolling iframe {
-            pointer-events: none;
-        }
-    </style>
-
-    <!-- Main CSS -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Three.js (Module) -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+      }
+    </script>
 </head>
 
 <body>
 
-    <nav class="navbar">
-        <div class="logo">TUSHAR.DEV</div>
-        <ul class="nav-links">
-            <li><a href="#hero">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Work</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-        </div>
-    </nav>
+    <!-- 3D Scene Container -->
+    <canvas id="webgl"></canvas>
 
-    <main>
-        <section id="hero" class="section hero">
-            <div class="container">
-                <h1 class="fade-in">Hi, I'm Tushar. <br> <span class="accent">Full Stack Developer</span></h1>
-                <p class="fade-in delay-1">CSE Student passionate about building scalable applications and solving
-                    algorithmic challenges.</p>
-                <a href="#projects" class="btn fade-in delay-2">View My Work</a>
-            </div>
-        </section>
+    <!-- UI Overlay -->
+    <div id="ui-container">
+        <header class="navbar">
+            <div class="logo">TUSHAR SAINI</div>
+            <nav>
+                <ul>
+                    <li><button data-target="home" class="active">Home</button></li>
+                    <li><button data-target="work">Work</button></li>
+                    <li><button data-target="about">About</button></li>
+                    <li><button data-target="contact">Contact</button></li>
+                </ul>
+            </nav>
+        </header>
 
-        <section id="about" class="section about">
-            <div class="container">
-                <div class="section-header">
-                    <h2>About Me</h2>
-                    <div class="line"></div>
+        <main id="content-panels">
+            <!-- Home Panel -->
+            <section id="home" class="panel active">
+                <div class="hero-content">
+                    <h1>Full Stack<br>Developer</h1>
+                    <p>CSE Student & Full Stack Enthusiast building immersive digital experiences.</p>
                 </div>
-                <div class="about-content">
-                    <div class="text-block">
-                        <p>I am a Computer Science Engineering student and an aspiring developer. I have a strong
-                            foundation in data structures, algorithms, and full-stack web development.</p>
-                        <p>I love turning complex problems into simple, beautiful, and intuitive designs. My expertise
-                            traverses across front-end interfaces and back-end logic, ensuring seamless user
-                            experiences.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="projects" class="section projects">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Selected Work</h2>
-                    <div class="line"></div>
-                </div>
-                <div class="project-grid">
-                    <!-- Project Card 1 -->
-                    <div class="project-card">
-                        <div class="card-image"></div>
-                        <div class="card-info">
+            <!-- Work Panel -->
+            <section id="work" class="panel">
+                <h2>Selected Work</h2>
+                <div class="project-list">
+                    <a href="https://github.com/TUSHAR-7436/RaktSarthi" target="_blank" class="project-item">
+                        <span class="p-date">01</span>
+                        <div class="p-info">
                             <h3>RaktSarthi</h3>
-                            <p>Modern platform connecting blood donors with recipients in real-time.</p>
-                            <div class="tags">
-                                <span>Healthcare</span>
-                                <span>Web App</span>
-                            </div>
+                            <p>Real-time Blood Donation Platform</p>
                         </div>
-                    </div>
-                    <!-- Project Card 2 -->
-                    <div class="project-card">
-                        <div class="card-image"></div>
-                        <div class="card-info">
-                            <h3>Banking Management</h3>
-                            <p>Comprehensive system for managing banking operations and customer data.</p>
-                            <div class="tags">
-                                <span>Finance</span>
-                                <span>Management</span>
-                            </div>
+                    </a>
+                    <a href="https://github.com/TUSHAR-7436/Banking-Mngt-System" target="_blank" class="project-item">
+                        <span class="p-date">02</span>
+                        <div class="p-info">
+                            <h3>Banking System</h3>
+                            <p>Management & Operations Dashboard</p>
                         </div>
-                    </div>
-                    <!-- Project Card 3 -->
-                    <div class="project-card">
-                        <div class="card-image"></div>
-                        <div class="card-info">
+                    </a>
+                    <a href="https://github.com/TUSHAR-7436/STUDENT_ACADEMIC_TRACKER" target="_blank"
+                        class="project-item">
+                        <span class="p-date">03</span>
+                        <div class="p-info">
                             <h3>Academic Tracker</h3>
-                            <p>Student performance tracking system built with SQL, PHP, and JS.</p>
-                            <div class="tags">
-                                <span>Education</span>
-                                <span>Full Stack</span>
-                            </div>
+                            <p>Student Performance Analytics</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- About Panel -->
+            <section id="about" class="panel">
+                <div class="about-grid">
+                    <div class="bio">
+                        <h2>About Me</h2>
+                        <p>I'm Tushar Saini, a Computer Science Engineering student passionate about solving algorithmic
+                            challenges and building scalable web applications.</p>
+                        <p>Currently exploring Three.js, React, and System Design.</p>
+                    </div>
+                    <div class="credentials">
+                        <h3>Internships</h3>
+                        <div class="cred-item">
+                            <span>Pending</span>
+                            <small>Details coming soon...</small>
+                        </div>
+
+                        <h3>Certificates</h3>
+                        <div class="cred-item">
+                            <span>Pending</span>
+                            <small>Details coming soon...</small>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="contact" class="section contact">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Let's Connect</h2>
-                    <div class="line"></div>
+            <!-- Contact Panel -->
+            <section id="contact" class="panel">
+                <h2>Get in Touch</h2>
+                <a href="mailto:tusharsaini7436@gmail.com" class="email-link">tusharsaini7436@gmail.com</a>
+                <div class="socials">
+                    <a href="https://www.linkedin.com/in/tushar7436/" target="_blank">LinkedIn</a>
+                    <a href="https://github.com/TUSHAR-7436" target="_blank">GitHub</a>
                 </div>
-                <div class="contact-links" style="margin-bottom: 2rem; display: flex; gap: 1rem;">
-                    <a href="https://www.linkedin.com/in/tushar7436/" target="_blank" class="btn"
-                        style="margin-top: 0; background: #0077b5;">LinkedIn</a>
-                    <a href="https://github.com/TUSHAR-7436" target="_blank" class="btn"
-                        style="margin-top: 0; background: #333;">GitHub</a>
-                </div>
-                <form class="contact-form">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" placeholder="Your Name">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" placeholder="tushar7436@gmail.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" rows="5" placeholder="Tell me about your project"></textarea>
-                    </div>
-                    <button type="submit" class="btn">Send Message</button>
-                </form>
-            </div>
-        </section>
+            </section>
+        </main>
 
-        <footer>
-            <p>&copy; 2025 Tushar Agarwal. All rights reserved.</p>
-        </footer>
-    </main>
+        <div class="footer-note">
+            <p>Drag to interact • Scroll to explore</p>
+        </div>
+    </div>
 
-    <!-- Lenis Script -->
-    <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 
 </html>
