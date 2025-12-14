@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tushar Agarwal | Full Stack Developer</title>
+    <meta name="description" content="Portfolio of Tushar Agarwal, a Full Stack Developer and CSE Student.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Lenis CSS (Recommended) -->
+    <style>
+        html.lenis,
+        html.lenis body {
+            height: auto;
+        }
+
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+
+        .lenis.lenis-scrolling iframe {
+            pointer-events: none;
+        }
+    </style>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">TUSHAR.DEV</div>
+        <ul class="nav-links">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Work</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <main>
+        <section id="hero" class="section hero">
+            <div class="container">
+                <h1 class="fade-in">Hi, I'm Tushar. <br> <span class="accent">Full Stack Developer</span></h1>
+                <p class="fade-in delay-1">CSE Student passionate about building scalable applications and solving
+                    algorithmic challenges.</p>
+                <a href="#projects" class="btn fade-in delay-2">View My Work</a>
+            </div>
+        </section>
+
+        <section id="about" class="section about">
+            <div class="container">
+                <div class="section-header">
+                    <h2>About Me</h2>
+                    <div class="line"></div>
+                </div>
+                <div class="about-content">
+                    <div class="text-block">
+                        <p>I am a Computer Science Engineering student and an aspiring developer. I have a strong
+                            foundation in data structures, algorithms, and full-stack web development.</p>
+                        <p>I love turning complex problems into simple, beautiful, and intuitive designs. My expertise
+                            traverses across front-end interfaces and back-end logic, ensuring seamless user
+                            experiences.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section projects">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Selected Work</h2>
+                    <div class="line"></div>
+                </div>
+                <div class="project-grid">
+                    <!-- Project Card 1 -->
+                    <div class="project-card">
+                        <div class="card-image"></div>
+                        <div class="card-info">
+                            <h3>RaktSarthi</h3>
+                            <p>Modern platform connecting blood donors with recipients in real-time.</p>
+                            <div class="tags">
+                                <span>Healthcare</span>
+                                <span>Web App</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Project Card 2 -->
+                    <div class="project-card">
+                        <div class="card-image"></div>
+                        <div class="card-info">
+                            <h3>Banking Management</h3>
+                            <p>Comprehensive system for managing banking operations and customer data.</p>
+                            <div class="tags">
+                                <span>Finance</span>
+                                <span>Management</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Project Card 3 -->
+                    <div class="project-card">
+                        <div class="card-image"></div>
+                        <div class="card-info">
+                            <h3>Academic Tracker</h3>
+                            <p>Student performance tracking system built with SQL, PHP, and JS.</p>
+                            <div class="tags">
+                                <span>Education</span>
+                                <span>Full Stack</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section contact">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Let's Connect</h2>
+                    <div class="line"></div>
+                </div>
+                <div class="contact-links" style="margin-bottom: 2rem; display: flex; gap: 1rem;">
+                    <a href="https://www.linkedin.com/in/tushar7436/" target="_blank" class="btn"
+                        style="margin-top: 0; background: #0077b5;">LinkedIn</a>
+                    <a href="https://github.com/TUSHAR-7436" target="_blank" class="btn"
+                        style="margin-top: 0; background: #333;">GitHub</a>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" placeholder="Your Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="tushar7436@gmail.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" rows="5" placeholder="Tell me about your project"></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Tushar Agarwal. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <!-- Lenis Script -->
+    <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
