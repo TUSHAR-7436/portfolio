@@ -20,24 +20,6 @@ body {
     /* Important for 3D full screen */
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-    width: 6px;
-}
-
-::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--accent);
-    border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #fff;
-}
-
 /* 3D Canvas */
 #webgl {
     position: fixed;
@@ -115,11 +97,10 @@ nav button.active {
 #content-panels {
     position: relative;
     width: 100%;
-    flex: 1;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
 }
 
 .panel {
@@ -128,11 +109,8 @@ nav button.active {
     transform: translateY(20px);
     transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     visibility: hidden;
-    max-width: 1200px;
-    width: 90%;
-    max-height: 100%;
-    overflow-y: auto;
-    padding-right: 10px;
+    max-width: 600px;
+    width: 100%;
 }
 
 .panel.active {
@@ -143,38 +121,33 @@ nav button.active {
 
 /* Typography */
 h1 {
-    font-size: 6rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    line-height: 0.95;
-    margin-bottom: 2rem;
-    background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+    font-size: 5rem;
+    line-height: 0.9;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(to right, #fff, #888);
     -webkit-background-clip: text;
-    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 h2 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 2.5rem;
+    font-size: 2rem;
+    margin-bottom: 2rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 0.5rem;
+    padding-bottom: 1rem;
     display: inline-block;
-    letter-spacing: -0.01em;
 }
 
 p {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     line-height: 1.6;
     color: #ccc;
 }
 
 /* Project List */
 .project-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 .project-item {
@@ -205,20 +178,17 @@ p {
 .p-info h3 {
     font-size: 1.25rem;
     margin-bottom: 0.25rem;
-    font-weight: 700;
 }
 
 .p-info p {
     font-size: 0.9rem;
-    color: #000;
+    color: #888;
 }
 
 /* About Grid */
 .about-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
-    padding-top: 4rem;
+    display: grid;
+    gap: 2rem;
 }
 
 .cred-item {
@@ -318,66 +288,9 @@ p {
 
 .credential-card h4 {
     font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    color: #fff;
-}
-
-/* Certificate Grid */
-.certificate-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-}
-
-.cert-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    padding: 1.5rem;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    position: relative;
-    overflow: hidden;
-    backdrop-filter: blur(5px);
-}
-
-.cert-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 3px;
-    height: 100%;
-    background: var(--accent);
-    opacity: 0.5;
-    transition: opacity 0.3s;
-}
-
-.cert-card:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.07);
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-}
-
-.cert-card:hover::before {
-    opacity: 1;
-}
-
-.cert-card h4 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    color: #fff;
-}
-
-.cert-issuer {
-    font-size: 0.85rem;
-    color: var(--accent);
     font-weight: 500;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
 }
 
 .credential-card .sub-info {
@@ -397,7 +310,7 @@ p {
 .credential-card p {
     font-size: 0.9rem;
     line-height: 1.5;
-    color: #000;
+    color: #aaa;
 }
 
 /* Mobile */
@@ -417,94 +330,4 @@ p {
     nav ul {
         gap: 1rem;
     }
-}
-
-/* Certificate Button */
-.view-cert-btn {
-    display: inline-block;
-    margin-top: 1rem;
-    padding: 0.6rem 1.2rem;
-    background: transparent;
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-weight: 600;
-}
-
-.view-cert-btn:hover {
-    background: var(--accent);
-    color: var(--bg-color);
-    box-shadow: 0 0 15px var(--accent);
-}
-
-/* Modal Overlay */
-#cert-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(8px);
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.4s ease;
-}
-
-#cert-modal.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Modal Content */
-#cert-modal-content {
-    position: relative;
-    max-width: 90%;
-    max-height: 90%;
-    background: rgba(20, 20, 20, 0.8);
-    padding: 1rem;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-    transform: scale(0.9);
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-#cert-modal.active #cert-modal-content {
-    transform: scale(1);
-}
-
-#cert-modal img {
-    max-width: 100%;
-    max-height: 80vh;
-    display: block;
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-}
-
-/* Close Button */
-.close-modal {
-    position: absolute;
-    top: -40px;
-    right: 0;
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 2rem;
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-.close-modal:hover {
-    color: var(--accent);
-    transform: rotate(90deg);
 }
