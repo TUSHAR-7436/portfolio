@@ -468,40 +468,64 @@ p {
 /* Modal Content */
 #cert-modal-content {
     position: relative;
-    max-width: 90%;
-    max-height: 90%;
-    background: rgba(20, 20, 20, 0.8);
-    padding: 1rem;
+    width: 95vw;
+    height: 95vh;
+    max-width: 95vw;
+    max-height: 95vh;
+    background: rgba(20, 20, 20, 0.9);
+    padding: 0;
+    /* Remove padding to maximize space */
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     transform: scale(0.9);
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #cert-modal.active #cert-modal-content {
     transform: scale(1);
 }
 
-#cert-modal img {
-    max-width: 100%;
-    max-height: 80vh;
-    display: block;
+#cert-modal img,
+#cert-frame {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Ensure image isn't cropped */
+    display: none;
+    /* Hidden by default, toggled by JS */
     border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    box-shadow: none;
+    /* Shadow handled by container */
+}
+
+#cert-frame {
+    width: 100%;
+    height: 100%;
+    background: #fff;
 }
 
 /* Close Button */
 .close-modal {
     position: absolute;
-    top: -40px;
-    right: 0;
-    background: none;
+    top: 10px;
+    right: 15px;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: none;
     color: #fff;
     font-size: 2rem;
     cursor: pointer;
-    transition: color 0.3s;
+    transition: all 0.3s;
 }
 
 .close-modal:hover {
