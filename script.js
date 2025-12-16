@@ -187,6 +187,7 @@ navButtons.forEach(btn => {
 // --- Certificate Modal Logic (Existing Logic) ---
 const modal = document.getElementById('cert-modal');
 const modalImg = document.getElementById('cert-image');
+const modalFrame = document.getElementById('cert-frame');
 const closeBtn = document.querySelector('.close-modal');
 const viewButtons = document.querySelectorAll('.view-cert-btn');
 
@@ -194,20 +195,37 @@ viewButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.preventDefault();
         const certSrc = btn.getAttribute('data-cert');
-        modalImg.src = certSrc;
+
+        // Check file extension
+        if (certSrc.toLowerCase().endsWith('.pdf')) {
+            modalImg.style.display = 'none';
+            modalFrame.style.display = 'block';
+            modalFrame.src = certSrc;
+        } else {
+            modalFrame.style.display = 'none';
+            modalImg.style.display = 'block';
+            modalImg.src = certSrc;
+        }
+
         modal.classList.add('active');
     });
 });
 
 closeBtn.addEventListener('click', () => {
     modal.classList.remove('active');
-    setTimeout(() => { modalImg.src = ''; }, 400);
+    setTimeout(() => {
+        modalImg.src = '';
+        modalFrame.src = '';
+    }, 400);
 });
 
 modal.addEventListener('click', (e) => {
     if (e.target === modal) {
         modal.classList.remove('active');
-        setTimeout(() => { modalImg.src = ''; }, 400);
+        setTimeout(() => {
+            modalImg.src = '';
+            modalFrame.src = '';
+        }, 400);
     }
 });
 
@@ -227,11 +245,11 @@ function animate() {
     material.uniforms.uTime.value = elapsedTime;
 
     // Smooth Rotation
-    targetRotationY += (mouseX - targetRotationY) * 0.03;
-    targetRotationX += (mouseY - targetRotationX) * 0.03;
+    targetRotationY += (mouseX - targetRotationY) * 0.02; // Slower smoothing
+    targetRotationX += (mouseY - targetRotationX) * 0.02;
 
-    group.rotation.y += ROTATION_SPEED + targetRotationY * 0.2;
-    group.rotation.x += targetRotationX * 0.2;
+    group.rotation.y += ROTATION_SPEED + targetRotationY * 0.1; // Reduced impact
+    group.rotation.x += targetRotationX * 0.1;
 
     // Gentle Float
     group.position.y = Math.sin(elapsedTime * 0.3) * 15;
