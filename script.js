@@ -1,173 +1,74 @@
 import * as THREE from 'three';
-import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
-import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
-import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
-import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 
 // --- Configuration ---
-const PARTICLE_COUNT = 2000;
-const SPHERE_RADIUS = 800;
-const ROTATION_SPEED = 0.0005;
+const PARTICLE_COUNT = 800; // Fewer particles for a cleaner look
+const MAX_DISTANCE = 150; // Distance for drawing lines between particles
 
 // --- State ---
 let mouseX = 0;
 let mouseY = 0;
-let targetRotationX = 0;
-let targetRotationY = 0;
 
 // --- Init Canvas ---
 const canvas = document.querySelector('#webgl');
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x000000);
-scene.fog = new THREE.FogExp2(0x000000, 0.001);
+scene.background = new THREE.Color(0x050505); // Very dark gray, matches CSS --bg-color
+scene.fog = new THREE.FogExp2(0x050505, 0.0015);
 
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
-camera.position.z = 1000;
+camera.position.z = 400;
 
-const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: false, powerPreference: "high-performance" }); // Antialias off for post-processing usually
+const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.toneMapping = THREE.ReinhardToneMapping;
 
-// --- Post Processing ---
-const renderScene = new RenderPass(scene, camera);
+// --- Geometry: Elegant Particle Network ---
+const particles = new THREE.BufferGeometry();
+const particlePositions = new Float32Array(PARTICLE_COUNT * 3);
+const particleVelocities = [];
 
-const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
-bloomPass.threshold = 0.15; // Raised threshold to avoid blooming dark background
-bloomPass.strength = 1.0; // Slightly reduced strength
-bloomPass.radius = 0.5;
-
-const outputPass = new OutputPass();
-
-const composer = new EffectComposer(renderer);
-composer.addPass(renderScene);
-composer.addPass(bloomPass);
-composer.addPass(outputPass);
-
-// --- Custom Shaders ---
-
-const vertexShader = `
-uniform float uTime;
-uniform float uPixelRatio;
-
-attribute float aScale;
-attribute vec3 aColor;
-
-varying vec3 vColor;
-varying float vAlpha;
-
-void main() {
-    vColor = aColor;
+for (let i = 0; i < PARTICLE_COUNT * 3; i += 3) {
+    particlePositions[i] = (Math.random() - 0.5) * 1000;
+    particlePositions[i + 1] = (Math.random() - 0.5) * 1000;
+    particlePositions[i + 2] = (Math.random() - 0.5) * 1000;
     
-    vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-    gl_Position = projectionMatrix * mvPosition;
-    
-    // Size attenuation
-    gl_PointSize = aScale * uPixelRatio * (800.0 / -mvPosition.z);
-    
-    // Simple pulse
-    float pulse = sin(uTime * 2.0 + position.x * 0.01) * 0.5 + 0.5;
-    vAlpha = 0.5 + 0.5 * pulse; 
-}
-`;
-
-const fragmentShader = `
-varying vec3 vColor;
-varying float vAlpha;
-
-void main() {
-    float r = distance(gl_PointCoord, vec2(0.5));
-    if (r > 0.5) discard;
-    
-    // Soft edge glow
-    float glow = 1.0 - (r * 2.0);
-    glow = pow(glow, 1.5);
-
-    gl_FragColor = vec4(vColor, vAlpha * glow);
-}
-`;
-
-// --- Geometry: Particle Network ---
-const geometry = new THREE.BufferGeometry();
-const positions = [];
-const colors = [];
-const scales = [];
-
-const color1 = new THREE.Color(0x00ffff); // Cyan
-const color2 = new THREE.Color(0xaa00ff); // Purple
-const color3 = new THREE.Color(0x0055ff); // Blue
-
-for (let i = 0; i < PARTICLE_COUNT; i++) {
-    const theta = Math.random() * Math.PI * 2;
-    const phi = Math.acos((Math.random() * 2) - 1);
-    const radius = SPHERE_RADIUS * Math.cbrt(Math.random());
-
-    const x = radius * Math.sin(phi) * Math.cos(theta);
-    const y = radius * Math.sin(phi) * Math.sin(theta);
-    const z = radius * Math.cos(phi);
-
-    positions.push(x, y, z);
-
-    // Random size
-    scales.push(Math.random() * 30 + 10);
-
-    // Gradient Color Mix based on position (or random)
-    const mixedColor = color1.clone().lerp(color2, Math.random());
-    if (Math.random() > 0.5) mixedColor.lerp(color3, Math.random());
-
-    colors.push(mixedColor.r, mixedColor.g, mixedColor.b);
+    particleVelocities.push({
+        x: (Math.random() - 0.5) * 0.2,
+        y: (Math.random() - 0.5) * 0.2,
+        z: (Math.random() - 0.5) * 0.2
+    });
 }
 
-geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-geometry.setAttribute('aColor', new THREE.Float32BufferAttribute(colors, 3));
-geometry.setAttribute('aScale', new THREE.Float32BufferAttribute(scales, 1));
+particles.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
 
-const material = new THREE.ShaderMaterial({
-    uniforms: {
-        uTime: { value: 0 },
-        uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) }
-    },
-    vertexShader: vertexShader,
-    fragmentShader: fragmentShader,
+// Particle Material
+const particleMaterial = new THREE.PointsMaterial({
+    color: 0x888888, // Subtle grey/white
+    size: 2,
     transparent: true,
-    depthWrite: false,
+    opacity: 0.6,
     blending: THREE.AdditiveBlending
 });
 
-const particlesMesh = new THREE.Points(geometry, material);
-const group = new THREE.Group();
-group.add(particlesMesh);
+const particleSystem = new THREE.Points(particles, particleMaterial);
+scene.add(particleSystem);
 
-// --- Dark 3D Object (Icosahedron) ---
-const sphereGeometry = new THREE.IcosahedronGeometry(SPHERE_RADIUS * 0.7, 2); // Slightly smaller than particles
-const wireframeMaterial = new THREE.MeshBasicMaterial({
-    color: 0x222222, // Dark Grey
-    wireframe: true,
+// Lines Geometry (Network effect)
+const linesGeometry = new THREE.BufferGeometry();
+const lineMaterial = new THREE.LineBasicMaterial({
+    color: 0x00ffff, // Cyan accent from CSS
     transparent: true,
-    opacity: 0.1 // Very subtle
+    opacity: 0.15,
+    blending: THREE.AdditiveBlending
 });
-const sphereMesh = new THREE.Mesh(sphereGeometry, wireframeMaterial);
-group.add(sphereMesh);
 
-// Inner Core for depth
-const coreGeometry = new THREE.IcosahedronGeometry(SPHERE_RADIUS * 0.6, 1);
-const coreMaterial = new THREE.MeshBasicMaterial({
-    color: 0x000000,
-    wireframe: true,
-    transparent: true,
-    opacity: 0.3
-});
-const coreMesh = new THREE.Mesh(coreGeometry, coreMaterial);
-group.add(coreMesh);
-
-
-scene.add(group);
-
+const linesMesh = new THREE.LineSegments(linesGeometry, lineMaterial);
+scene.add(linesMesh);
 
 // --- Interaction ---
 document.addEventListener('mousemove', (event) => {
-    mouseX = (event.clientX - window.innerWidth / 2) * 0.0005; // Reduced sensitivity
-    mouseY = (event.clientY - window.innerHeight / 2) * 0.0005;
+    // Normalize mouse coordinates for subtle camera movement
+    mouseX = (event.clientX - window.innerWidth / 2) * 0.05;
+    mouseY = (event.clientY - window.innerHeight / 2) * 0.05;
 });
 
 // UI Navigation (Existing Logic)
@@ -236,28 +137,60 @@ document.addEventListener('keydown', (e) => {
 });
 
 // --- Animation Loop ---
-const clock = new THREE.Clock();
-
 function animate() {
-    const elapsedTime = clock.getElapsedTime();
-
-    // Uniform Update
-    material.uniforms.uTime.value = elapsedTime;
-
-    // Smooth Rotation
-    targetRotationY += (mouseX - targetRotationY) * 0.02; // Slower smoothing
-    targetRotationX += (mouseY - targetRotationX) * 0.02;
-
-    group.rotation.y += ROTATION_SPEED + targetRotationY * 0.1; // Reduced impact
-    group.rotation.x += targetRotationX * 0.1;
-
-    // Gentle Float
-    group.position.y = Math.sin(elapsedTime * 0.3) * 15;
-
-    // Render via Composer (includes Bloom)
-    composer.render();
-
     requestAnimationFrame(animate);
+
+    // Subtle camera movement based on mouse
+    camera.position.x += (mouseX - camera.position.x) * 0.05;
+    camera.position.y += (-mouseY - camera.position.y) * 0.05;
+    camera.lookAt(scene.position);
+    
+    // Slow, constant rotation of the entire system
+    particleSystem.rotation.y += 0.001;
+    linesMesh.rotation.y += 0.001;
+
+    // Update particle positions
+    const positions = particleSystem.geometry.attributes.position.array;
+    
+    // Arrays for lines
+    const linePositions = [];
+    
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+        // Move particles
+        positions[i * 3] += particleVelocities[i].x;
+        positions[i * 3 + 1] += particleVelocities[i].y;
+        positions[i * 3 + 2] += particleVelocities[i].z;
+        
+        // Wrap around bounds
+        if (positions[i * 3] > 500) positions[i * 3] = -500;
+        if (positions[i * 3] < -500) positions[i * 3] = 500;
+        if (positions[i * 3 + 1] > 500) positions[i * 3 + 1] = -500;
+        if (positions[i * 3 + 1] < -500) positions[i * 3 + 1] = 500;
+        if (positions[i * 3 + 2] > 500) positions[i * 3 + 2] = -500;
+        if (positions[i * 3 + 2] < -500) positions[i * 3 + 2] = 500;
+        
+        // Connect particles that are close to each other
+        for (let j = i + 1; j < PARTICLE_COUNT; j++) {
+            const dx = positions[i * 3] - positions[j * 3];
+            const dy = positions[i * 3 + 1] - positions[j * 3 + 1];
+            const dz = positions[i * 3 + 2] - positions[j * 3 + 2];
+            const distSq = dx * dx + dy * dy + dz * dz;
+            
+            if (distSq < MAX_DISTANCE * MAX_DISTANCE) {
+                linePositions.push(
+                    positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2],
+                    positions[j * 3], positions[j * 3 + 1], positions[j * 3 + 2]
+                );
+            }
+        }
+    }
+    
+    particleSystem.geometry.attributes.position.needsUpdate = true;
+    
+    // Update lines
+    linesMesh.geometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
+
+    renderer.render(scene, camera);
 }
 
 animate();
@@ -267,6 +200,4 @@ window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
-    composer.setSize(window.innerWidth, window.innerHeight); // Important for bloom
-    material.uniforms.uPixelRatio.value = Math.min(window.devicePixelRatio, 2);
 });
