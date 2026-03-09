@@ -11,8 +11,8 @@ let mouseY = 0;
 // --- Init Canvas ---
 const canvas = document.querySelector('#webgl');
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x050505); // Very dark gray, matches CSS --bg-color
-scene.fog = new THREE.FogExp2(0x050505, 0.0015);
+scene.background = new THREE.Color(0x020202); // Very dark gray, matches CSS --bg-color
+scene.fog = new THREE.FogExp2(0x020202, 0.0015);
 
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
 camera.position.z = 400;
@@ -30,7 +30,7 @@ for (let i = 0; i < PARTICLE_COUNT * 3; i += 3) {
     particlePositions[i] = (Math.random() - 0.5) * 1000;
     particlePositions[i + 1] = (Math.random() - 0.5) * 1000;
     particlePositions[i + 2] = (Math.random() - 0.5) * 1000;
-    
+
     particleVelocities.push({
         x: (Math.random() - 0.5) * 0.2,
         y: (Math.random() - 0.5) * 0.2,
@@ -42,10 +42,10 @@ particles.setAttribute('position', new THREE.BufferAttribute(particlePositions, 
 
 // Particle Material
 const particleMaterial = new THREE.PointsMaterial({
-    color: 0x888888, // Subtle grey/white
-    size: 2,
+    color: 0x666666, // Subdued grey
+    size: 1.5,
     transparent: true,
-    opacity: 0.6,
+    opacity: 0.3,
     blending: THREE.AdditiveBlending
 });
 
@@ -55,9 +55,9 @@ scene.add(particleSystem);
 // Lines Geometry (Network effect)
 const linesGeometry = new THREE.BufferGeometry();
 const lineMaterial = new THREE.LineBasicMaterial({
-    color: 0x00ffff, // Cyan accent from CSS
+    color: 0x00aaff, // Slightly darker cyan accent
     transparent: true,
-    opacity: 0.15,
+    opacity: 0.08,
     blending: THREE.AdditiveBlending
 });
 
@@ -144,23 +144,23 @@ function animate() {
     camera.position.x += (mouseX - camera.position.x) * 0.05;
     camera.position.y += (-mouseY - camera.position.y) * 0.05;
     camera.lookAt(scene.position);
-    
+
     // Slow, constant rotation of the entire system
     particleSystem.rotation.y += 0.001;
     linesMesh.rotation.y += 0.001;
 
     // Update particle positions
     const positions = particleSystem.geometry.attributes.position.array;
-    
+
     // Arrays for lines
     const linePositions = [];
-    
+
     for (let i = 0; i < PARTICLE_COUNT; i++) {
         // Move particles
         positions[i * 3] += particleVelocities[i].x;
         positions[i * 3 + 1] += particleVelocities[i].y;
         positions[i * 3 + 2] += particleVelocities[i].z;
-        
+
         // Wrap around bounds
         if (positions[i * 3] > 500) positions[i * 3] = -500;
         if (positions[i * 3] < -500) positions[i * 3] = 500;
@@ -168,14 +168,14 @@ function animate() {
         if (positions[i * 3 + 1] < -500) positions[i * 3 + 1] = 500;
         if (positions[i * 3 + 2] > 500) positions[i * 3 + 2] = -500;
         if (positions[i * 3 + 2] < -500) positions[i * 3 + 2] = 500;
-        
+
         // Connect particles that are close to each other
         for (let j = i + 1; j < PARTICLE_COUNT; j++) {
             const dx = positions[i * 3] - positions[j * 3];
             const dy = positions[i * 3 + 1] - positions[j * 3 + 1];
             const dz = positions[i * 3 + 2] - positions[j * 3 + 2];
             const distSq = dx * dx + dy * dy + dz * dz;
-            
+
             if (distSq < MAX_DISTANCE * MAX_DISTANCE) {
                 linePositions.push(
                     positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2],
@@ -184,9 +184,9 @@ function animate() {
             }
         }
     }
-    
+
     particleSystem.geometry.attributes.position.needsUpdate = true;
-    
+
     // Update lines
     linesMesh.geometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
 
