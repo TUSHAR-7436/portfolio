@@ -170,6 +170,28 @@ p {
     color: #ccc;
 }
 
+/* Base Buttons */
+.btn-primary {
+    padding: 0.8rem 2rem;
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background: var(--accent);
+    color: var(--bg-color);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+}
+
 /* Project List */
 .project-list {
     display: grid;
