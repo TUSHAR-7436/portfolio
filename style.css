@@ -1,8 +1,9 @@
 :root {
-    --bg-color: #020202;
-    --text-color: #ffffff;
-    --accent: #00ffff;
-    --panel-bg: rgba(0, 0, 0, 0.4);
+    --bg-color: #ffffff;
+    --text-color: #111111;
+    --accent: #0077ff;
+    /* Changed cyan to blue for better contrast on white */
+    --panel-bg: rgba(255, 255, 255, 0.8);
     --font-main: 'Outfit', sans-serif;
 }
 
@@ -148,7 +149,7 @@ h1 {
     letter-spacing: -0.02em;
     line-height: 0.95;
     margin-bottom: 2rem;
-    background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+    background: linear-gradient(135deg, #111 0%, #555 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -158,7 +159,7 @@ h2 {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 2.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     padding-bottom: 0.5rem;
     display: inline-block;
     letter-spacing: -0.01em;
@@ -167,7 +168,8 @@ h2 {
 p {
     font-size: 1.15rem;
     line-height: 1.6;
-    color: #ccc;
+    color: #444;
+    /* Darker gray for readable text on white */
 }
 
 /* Base Buttons */
@@ -188,8 +190,8 @@ p {
 
 .btn-primary:hover {
     background: var(--accent);
-    color: var(--bg-color);
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(0, 119, 255, 0.4);
 }
 
 /* Project List */
@@ -204,8 +206,10 @@ p {
     align-items: center;
     gap: 1.5rem;
     padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.03);
+    /* Darker background for cards */
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    /* Darker border */
     border-radius: 8px;
     text-decoration: none;
     color: inherit;
@@ -213,7 +217,7 @@ p {
 }
 
 .project-item:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.05);
     transform: translateX(10px);
     border-color: var(--accent);
 }
@@ -305,8 +309,9 @@ p {
 }
 
 .credential-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.02);
+    /* Light gray for cards on white bg */
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 12px;
     padding: 1.5rem;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -329,9 +334,10 @@ p {
 
 .credential-card:hover {
     transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.07);
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
+    /* Softer shadow for light theme */
 }
 
 .credential-card:hover::before {
@@ -342,7 +348,8 @@ p {
     font-size: 1.1rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    color: #fff;
+    color: #111;
+    /* Black text for light theme */
 }
 
 /* Certificate Grid */
@@ -355,8 +362,8 @@ p {
 }
 
 .cert-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 12px;
     padding: 1.5rem;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -379,9 +386,9 @@ p {
 
 .cert-card:hover {
     transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.07);
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
 }
 
 .cert-card:hover::before {
@@ -392,7 +399,7 @@ p {
     font-size: 1.1rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    color: #fff;
+    color: #111;
 }
 
 .cert-issuer {
@@ -460,8 +467,9 @@ p {
 
 .view-cert-btn:hover {
     background: var(--accent);
-    color: var(--bg-color);
-    box-shadow: 0 0 15px var(--accent);
+    color: #fff;
+    /* White text on hover for contrast with blue button */
+    box-shadow: 0 0 15px rgba(0, 119, 255, 0.4);
 }
 
 /* Modal Overlay */

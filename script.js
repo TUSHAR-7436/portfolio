@@ -11,8 +11,8 @@ let mouseY = 0;
 // --- Init Canvas ---
 const canvas = document.querySelector('#webgl');
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x020202); // Very dark gray, matches CSS --bg-color
-scene.fog = new THREE.FogExp2(0x020202, 0.0015);
+scene.background = new THREE.Color(0xffffff); // White background
+scene.fog = new THREE.FogExp2(0xffffff, 0.0015);
 
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
 camera.position.z = 400;
@@ -42,11 +42,11 @@ particles.setAttribute('position', new THREE.BufferAttribute(particlePositions, 
 
 // Particle Material
 const particleMaterial = new THREE.PointsMaterial({
-    color: 0x666666, // Subdued grey
-    size: 1.5,
+    color: 0x333333, // Dark grey for white bg
+    size: 2,
     transparent: true,
-    opacity: 0.3,
-    blending: THREE.AdditiveBlending
+    opacity: 0.5,
+    blending: THREE.NormalBlending // Normal blending works better on white
 });
 
 const particleSystem = new THREE.Points(particles, particleMaterial);
@@ -55,10 +55,10 @@ scene.add(particleSystem);
 // Lines Geometry (Network effect)
 const linesGeometry = new THREE.BufferGeometry();
 const lineMaterial = new THREE.LineBasicMaterial({
-    color: 0x00aaff, // Slightly darker cyan accent
+    color: 0x0077ff, // Blue accent matches CSS
     transparent: true,
-    opacity: 0.08,
-    blending: THREE.AdditiveBlending
+    opacity: 0.15,
+    blending: THREE.NormalBlending
 });
 
 const linesMesh = new THREE.LineSegments(linesGeometry, lineMaterial);
