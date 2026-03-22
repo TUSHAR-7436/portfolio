@@ -71,17 +71,27 @@ document.addEventListener('mousemove', (event) => {
     mouseY = (event.clientY - window.innerHeight / 2) * 0.05;
 });
 
-// UI Navigation (Existing Logic)
-const navButtons = document.querySelectorAll('nav button');
-const panels = document.querySelectorAll('.panel');
+// UI Navigation (Scroll Logic)
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('.panel');
+const uiContainer = document.getElementById('ui-container');
 
-navButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-        const target = btn.dataset.target;
-        navButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        panels.forEach(p => p.classList.remove('active'));
-        document.getElementById(target).classList.add('active');
+uiContainer.addEventListener('scroll', () => {
+    let currentId = 'home'; // Default fallback
+    
+    sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        // If the section's top crosses the upper 40% of the viewport, it's the active one
+        if (rect.top <= window.innerHeight * 0.4) {
+            currentId = section.getAttribute('id');
+        }
+    });
+
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${currentId}`) {
+            link.classList.add('active');
+        }
     });
 });
 

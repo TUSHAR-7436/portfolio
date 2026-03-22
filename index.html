@@ -36,23 +36,31 @@
             <div class="logo">TUSHAR SAINI</div>
             <nav>
                 <ul>
-                    <li><button data-target="home" class="active">Home</button></li>
-                    <li><button data-target="about">About</button></li>
-                    <li><button data-target="work">Projects</button></li>
-                    <li><button data-target="certs">Certificates & Internships</button></li>
-                    <li><button data-target="contact">Contact</button></li>
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#work" class="nav-link">Projects</a></li>
+                    <li><a href="#certs" class="nav-link">Certificates & Internships</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
             </nav>
         </header>
 
         <main id="content-panels">
             <!-- Home Panel -->
-            <section id="home" class="panel active">
-                <div class="hero-content">
-                    <h1>Full Stack<br>Developer</h1>
-                    <a href="https://drive.google.com/file/d/1HgW2PiV_AkLcgWHet102LxUtuT0YDJRt/view?usp=sharing"
-                        target="_blank" class="btn-primary" style="margin-top: 2rem; display: inline-block;">View /
-                        Download CV</a>
+            <section id="home" class="panel">
+                <div class="hero-content" style="max-width: 800px;">
+                    <p class="greeting"
+                        style="font-size: 1.2rem; color: var(--accent); margin-bottom: 1rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;">
+                        Hi there! I am Tushar Saini</p>
+                    <h1 style="margin-bottom: 1rem;">Full Stack<br>Developer</h1>
+                    <p class="hero-desc"
+                        style="font-size: 1.2rem; color: #555; max-width: 600px; margin-bottom: 2.5rem; line-height: 1.6;">
+                    </p>
+                    <div class="hero-actions" style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                        <a href="https://drive.google.com/file/d/1HgW2PiV_AkLcgWHet102LxUtuT0YDJRt/view?usp=sharing"
+                            target="_blank" class="btn-primary">View / Download CV</a>
+                        <a href="#work" class="btn-secondary">Explore Work</a>
+                    </div>
                 </div>
             </section>
 
@@ -65,30 +73,67 @@
                             challenges and building scalable web applications. Currently exploring Three.js, React, and
                             System Design.</p>
 
-                        <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--accent);">Qualifications
-                        </h3>
-                        <ul style="list-style-type: none; padding-left: 0;">
-                            <li style="margin-bottom: 1.5rem; padding-left: 1.5rem; position: relative;">
-                                <span style="position: absolute; left: 0; color: var(--accent);">▹</span>
-                                <strong>Lovely Professional University (Phagwara, Punjab)</strong><br>
-                                Bachelor of Technology - Computer Science and Engineering<br>
-                                <span style="color: #666; font-size: 0.9em;">Aug 2023 - Present | CGPA: 6.86</span>
-                            </li>
-                            <li style="margin-bottom: 1.5rem; padding-left: 1.5rem; position: relative;">
-                                <span style="position: absolute; left: 0; color: var(--accent);">▹</span>
-                                <strong>Rishikul Vidyapeeth Sonepat (Sonipat, Haryana)</strong><br>
-                                Intermediate (Class XII)<br>
-                                <span style="color: #666; font-size: 0.9em;">Apr 2022 – Mar 2023 | Percentage:
-                                    67%</span>
-                            </li>
-                            <li style="margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative;">
-                                <span style="position: absolute; left: 0; color: var(--accent);">▹</span>
-                                <strong>Rishikul Vidyapeeth Sonepat (Sonipat, Haryana)</strong><br>
-                                Matriculation (Class X)<br>
-                                <span style="color: #666; font-size: 0.9em;">Apr 2020 – Mar 2021 | Percentage:
-                                    86.4%</span>
-                            </li>
-                        </ul>
+                        <h3 style="margin-top: 2rem; margin-bottom: 1.5rem; color: var(--accent);">Qualifications</h3>
+                        <div class="qualifications-grid">
+                            <div class="qual-card">
+                                <h4>Lovely Professional University (Phagwara, Punjab)</h4>
+                                <p class="qual-degree">Bachelor of Technology - Computer Science and Engineering</p>
+                                <div class="qual-meta">
+                                    <span>Aug 2023 - Present</span>
+                                    <span>CGPA: 6.86</span>
+                                </div>
+                            </div>
+                            <div class="qual-card">
+                                <h4>Rishikul Vidyapeeth Sonepat (Sonipat, Haryana)</h4>
+                                <p class="qual-degree">Intermediate (Class XII)</p>
+                                <div class="qual-meta">
+                                    <span>Apr 2022 – Mar 2023</span>
+                                    <span>Percentage: 67%</span>
+                                </div>
+                            </div>
+                            <div class="qual-card">
+                                <h4>Rishikul Vidyapeeth Sonepat (Sonipat, Haryana)</h4>
+                                <p class="qual-degree">Matriculation (Class X)</p>
+                                <div class="qual-meta">
+                                    <span>Apr 2020 – Mar 2021</span>
+                                    <span>Percentage: 86.4%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Skills Section -->
+                        <h3 style="margin-top: 3rem; margin-bottom: 1.5rem; color: var(--accent);">Skills</h3>
+                        <div class="skills-container" style="margin-bottom: 2rem;">
+                            <div class="skill-category">
+                                <h4>Languages</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">C/C++</span>
+                                    <span class="skill-tag">Java</span>
+                                    <span class="skill-tag">Python</span>
+                                    <span class="skill-tag">JavaScript</span>
+                                    <span class="skill-tag">SQL</span>
+                                </div>
+                            </div>
+                            <div class="skill-category">
+                                <h4>Web Technologies</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">HTML5</span>
+                                    <span class="skill-tag">CSS3</span>
+                                    <span class="skill-tag">React</span>
+                                    <span class="skill-tag">Three.js</span>
+                                </div>
+                            </div>
+                            <div class="skill-category">
+                                <h4>Core Concepts & Tools</h4>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Data Structures & Algorithms (DSA)</span>
+                                    <span class="skill-tag">Object-Oriented Programming (OOPs)</span>
+                                    <span class="skill-tag">System Design</span>
+                                    <span class="skill-tag">Generative AI / LLMs</span>
+                                    <span class="skill-tag">Data Analytics</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -98,25 +143,84 @@
                 <h2>Selected Projects</h2>
                 <div class="project-list">
                     <a href="https://github.com/TUSHAR-7436/RaktSarthi" target="_blank" class="project-item">
-                        <span class="p-date">01</span>
-                        <div class="p-info">
-                            <h3>RaktSarthi</h3>
-                            <p>Real-time Blood Donation Platform</p>
+                        <div class="p-image-box">
+                            <img src="assets/images/raktsarthi.png" alt="RaktSarthi">
                         </div>
-                    </a>
-                    <a href="https://github.com/TUSHAR-7436/Banking-Mngt-System" target="_blank" class="project-item">
-                        <span class="p-date">02</span>
-                        <div class="p-info">
-                            <h3>Banking System</h3>
-                            <p>Management & Operations Dashboard</p>
+                        <div class="p-content-box">
+                            <div class="p-header">
+                                <h3>RaktSarthi</h3>
+                                <span class="p-date">Oct 2025 - Nov 2025</span>
+                            </div>
+                            <div class="p-tech-stack">
+                                <span class="p-tech">React.js</span>
+                                <span class="p-tech">Node.js</span>
+                                <span class="p-tech">Express.js</span>
+                                <span class="p-tech">MongoDB</span>
+                                <span class="p-tech">SQL</span>
+                                <span class="p-tech">API</span>
+                                <span class="p-tech">Firebase</span>
+                            </div>
+                            <ul class="p-desc">
+                                <li>Built RaktSarthi, a scalable full-stack web platform enabling real-time matching
+                                    between blood donors and recipients using optimized search logic.</li>
+                                <li>Implemented search and filtering algorithms to locate nearby donors efficiently,
+                                    along with request handling features to streamline emergency blood requirements.
+                                </li>
+                                <li>Designed and integrated backend APIs and database management to ensure secure data
+                                    handling, scalability, and real-time accessibility of donor information.</li>
+                            </ul>
                         </div>
                     </a>
                     <a href="https://github.com/TUSHAR-7436/STUDENT_ACADEMIC_TRACKER" target="_blank"
                         class="project-item">
-                        <span class="p-date">03</span>
-                        <div class="p-info">
-                            <h3>Academic Tracker</h3>
-                            <p>Student Performance Analytics</p>
+                        <div class="p-image-box">
+                            <img src="assets/images/academic.png" alt="Student Academic Tracker">
+                        </div>
+                        <div class="p-content-box">
+                            <div class="p-header">
+                                <h3>Student Academic Tracker</h3>
+                                <span class="p-date">May 2025 - Apr 2025</span>
+                            </div>
+                            <div class="p-tech-stack">
+                                <span class="p-tech">MERN Stack</span>
+                                <span class="p-tech">Responsive Web Design</span>
+                            </div>
+                            <ul class="p-desc">
+                                <li>Built a web-based application to track and manage student’s academic performance and
+                                    progress.</li>
+                                <li>Introduced features to record marks, attendance and subject-wise reports with an
+                                    intuitive user interface.</li>
+                                <li>Integrated a MySQL database for secure storage and real-time retrieval of student
+                                    records and added an admin dashboard for teachers to analyze performance and
+                                    generate automated progress reports.</li>
+                            </ul>
+                        </div>
+                    </a>
+                    <a href="https://github.com/TUSHAR-7436/Banking-Mngt-System" target="_blank" class="project-item">
+                        <div class="p-image-box">
+                            <img src="assets/images/banking.png" alt="Banking Management System">
+                        </div>
+                        <div class="p-content-box">
+                            <div class="p-header">
+                                <h3>Banking Management System</h3>
+                                <span class="p-date">May' 24 – Jun' 24</span>
+                            </div>
+                            <div class="p-tech-stack">
+                                <span class="p-tech">Python</span>
+                                <span class="p-tech">MySQL</span>
+                                <span class="p-tech">PHP</span>
+                                <span class="p-tech">HTML</span>
+                                <span class="p-tech">CSS</span>
+                            </div>
+                            <ul class="p-desc">
+                                <li>Implemented a banking management system using Python, connecting to a MySQL database
+                                    for data storage and retrieval.</li>
+                                <li>Enhanced the system with core functionalities such as creating new accounts,
+                                    managing deposits and withdrawals, and checking account balances.</li>
+                                <li>Engineered the system to securely processed user input, updated account information
+                                    in the database, strengthened validation workflows, and ensured end-to-end data
+                                    integrity across all operations.</li>
+                            </ul>
                         </div>
                     </a>
                 </div>
@@ -371,11 +475,27 @@
             <!-- Contact Panel -->
             <section id="contact" class="panel">
                 <h2>Get in Touch</h2>
-                <a href="mailto:tusharsaini7436@gmail.com" class="email-link">tusharsaini7436@gmail.com</a>
-                <div class="socials">
+
+                <div class="socials" style="margin-bottom: 3rem; justify-content: center;">
+                    <a href="mailto:tusharsaini7436@gmail.com">Email</a>
                     <a href="https://www.linkedin.com/in/tushar7436/" target="_blank">LinkedIn</a>
                     <a href="https://github.com/TUSHAR-7436" target="_blank">GitHub</a>
                 </div>
+
+                <form class="contact-form" action="mailto:tusharsaini7436@gmail.com" method="POST" enctype="text/plain">
+                    <p style="text-align: center; margin-bottom: 1.5rem; font-size: 0.95rem; color: #555;">Have a
+                        question or want to work together? Send me a message and I'll get back to you shortly!</p>
+                    <div class="form-group">
+                        <input type="text" name="Name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="Email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="Message" placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%;">Send Message</button>
+                </form>
             </section>
         </main>
 
